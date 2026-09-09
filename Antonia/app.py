@@ -124,7 +124,7 @@ directorio_actual = "."
 carpetas_posibles = [d for d in os.listdir(directorio_actual) if d.lower() == "fotos" and os.path.isdir(d)]
 
 if carpetas_posibles:
-    carpeta_fotos = carpetas_posibles[0]
+    carpeta_fotos = "Antonia/fotos"
     archivos_fotos = [
         os.path.join(carpeta_fotos, f) 
         for f in os.listdir(carpeta_fotos) 
