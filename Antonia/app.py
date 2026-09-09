@@ -119,12 +119,16 @@ st.divider()
 # --- 3. GALERÍA DE FOTOS EN 2 COLUMNAS ---
 st.subheader("📸 Nuestros mejores momentos 💫")
 
-# Busca la carpeta fotos sin importar mayúsculas/minúsculas
-directorio_actual = "."
-carpetas_posibles = [d for d in os.listdir(directorio_actual) if d.lower() == "fotos" and os.path.isdir(d)]
+# Rutas posibles donde puede estar la carpeta de imágenes
+rutas_posibles = ["fotos", "Antonia/fotos", "./fotos"]
+carpeta_fotos = None
 
-if carpetas_posibles:
-    carpeta_fotos = "Antonia/fotos"
+for ruta in rutas_posibles:
+    if os.path.exists(ruta) and os.path.isdir(ruta):
+        carpeta_fotos = ruta
+        break
+
+if carpeta_fotos:
     archivos_fotos = [
         os.path.join(carpeta_fotos, f) 
         for f in os.listdir(carpeta_fotos) 
@@ -139,10 +143,9 @@ if carpetas_posibles:
             else:
                 col_der.image(foto, use_container_width=True)
     else:
-        st.info("La carpeta 'fotos' existe pero no contiene imágenes en formato JPG o PNG.")
+        st.info("La carpeta 'fotos' existe pero no contiene imágenes soportadas.")
 else:
-    st.info("Crea una carpeta llamada 'fotos' para agregar las imágenes.")
-
+    st.info("No se encontró la carpeta con las imágenes.")
 # --- 4. MENSAJE FINAL ---
 if st.button("Haz clic aquí ❤️", use_container_width=True):
     st.balloons()
